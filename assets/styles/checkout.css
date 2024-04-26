@@ -1,0 +1,105 @@
+/* Style général de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* En-tête */
+#header {
+    background: #fff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 0;
+}
+
+#logo h1.site-title {
+    text-align: center;
+    margin: 0;
+    font-size: 2em;
+    color: #333;
+}
+
+/* Contenu principal */
+.main-content {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Information de facturation */
+.billing-information {
+    width: 50%;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-right: 80%;
+    
+}
+
+.billing-information h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.billing-information label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.billing-information input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Récapitulatif de commande */
+.order-summary {
+    width: 30%;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.order-summary h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.order-summary .item {
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-summary .item:last-child {
+    border-bottom: none;
+}
+
+.order-summary .price {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Boutons */
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}

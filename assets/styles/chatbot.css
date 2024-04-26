@@ -1,0 +1,13 @@
+#chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050; /* Assurez-vous qu'il est au-dessus des autres éléments */
+    background: rgb(186, 31, 31);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    padding: 10px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto; /* Pour gérer le défilement si beaucoup de messages */
+}
