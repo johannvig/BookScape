@@ -1,0 +1,144 @@
+:root {
+    --first-color: #43454B;
+    --second-color: #DADADA;
+    --text-color: black;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+
+}
+
+header{
+    padding-top: 15vh;
+    height: 45vh;
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: var(--second-color);
+}
+
+
+#Accueil{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+#Accueil img{
+    height: 20vh;
+}
+
+#bar_de_recherche{
+    margin-left: 15%;
+    margin-top: 5vh;
+    width: 50vw;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 8px 6px -6px var(--first-color);
+}
+
+#bar_de_recherche input{
+    width: 90%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 1.5rem;
+}
+#bar_de_recherche button{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    width: 10%;
+}
+#bar_de_recherche img{
+    width: 80%;
+}
+
+
+#bordure{
+    width: 100%;
+    margin-top: -1px;
+}
+
+
+
+#promotion{
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+
+}
+
+#containeur_page{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10vh; 
+}
+#imageExplication{
+    width: 90%;
+}
+
+.explication {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15vh;
+}
+.explication .text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 60%;
+}
+.explication img{
+    width: 30%;
+}
+
+.explication a{
+    text-decoration: none;
+    color: var(--first-color);
+    font-size: 1em;
+    height: 5vh;
+    width: 8vw;
+    border: 1px solid var(--first-color);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 21vw;
+}
+.explication a:hover{
+    background-color: var(--first-color);
+    color: white;
+    cursor: pointer;
+}
+footer{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    height: 10vh;
+    padding-left: 10%;
+    padding-right: 10%;
+    justify-content: space-around;
+    background-color: var(--second-color);
+}
+footer a{
+    text-decoration: none;
+    color: var(--first-color);
+    font-size: 1.2em;
+}
+footer a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+

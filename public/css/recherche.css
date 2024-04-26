@@ -1,0 +1,117 @@
+#block{
+    height: 5vh;
+}
+#containeur_filtre_titre{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 85%;
+    margin-left: 10%;
+}
+#openPopup{
+    background-color: transparent;
+    border: 2px solid #43454b;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 5vh;
+    width: 5vw;
+}
+#containeur_produit{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-left: 10%;
+}
+.produit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: 40vh;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    transition: transform 0.5s ease;
+}
+.produit img{
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+.produit:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+.produit{
+    text-decoration: none;
+    color: black;
+}
+
+#filtres {
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9; 
+    border-top: 1px solid #ccc; 
+    padding: 20px;
+    display: none; 
+    overflow: hidden; 
+    transition: all 0.3s ease;
+}
+
+#form_filtre input[type="text"],
+#form_filtre input[type="number"],
+#form_filtre select {
+    width: 30%; 
+    padding: 8px 12px;
+    margin-bottom: 10px; 
+    border: 1px solid #ddd;
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    margin-left: 35%;
+}
+
+#form_filtre input[type="submit"] {
+    width: 30%; 
+    padding: 10px 12px; 
+    margin-top: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    background-color: #43454b;
+    color: white; 
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease; 
+    margin-left: 35%;
+}
+
+#form_filtre input[type="submit"]:hover {
+    background-color: #999; 
+}
+
+#form_filtre ::placeholder {
+    color: #999;
+    font-style: italic; 
+}
+
+#form_filtre input[type="text"]:focus,
+#form_filtre input[type="number"]:focus,
+#form_filtre select:focus {
+    outline: none; 
+    border-color: #999; 
+    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2); 
+}
+
+#containeur_filtre_titre button {
+    margin: 10px 0;
+    padding: 10px 20px; 
+    background-color: #43454b; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 4px; 
+}
+
+#containeur_filtre_titre button:hover {
+    background-color: #555; 
+}

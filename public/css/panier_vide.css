@@ -1,0 +1,14 @@
+#bloc{
+    height: 10vh;
+}
+#page{
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    width: 90%;
+    margin-left: 10%;
+}
+#promotion{
+    margin-left: 10%;
+
+}

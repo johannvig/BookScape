@@ -1,0 +1,115 @@
+
+/* Add padding to the body to make space for the sidebar */
+body {
+    padding-left: 0;
+}
+
+
+
+
+
+.sidebar-fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+
+
+/* Use Flexbox to create a layout with a sidebar and a main content area */
+.body-with-sidebar {
+    display: flex;
+    height: 100vh; /* Make sure the parent container fills the viewport height */
+}
+
+#sidebar {
+    background: #333;
+    color: white;
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh; /* This will ensure the sidebar itself extends full height */
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Align to the top */
+    bottom: 0; /* Align to the bottom */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+#sidebar .sidebar-content {
+    padding: 20px;
+    background: #424242;
+}
+
+#wpbody-content {
+    margin-left: 250px; /* Adjust this value to match the sidebar width */
+    /* Other styles... */
+}
+
+/* Ensure the sidebar is fixed and the main content is scrollable */
+.sidebar-fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.main-content {
+    margin-left: 250px; /* Same width as the sidebar */
+    overflow-y: auto;
+    height: 100vh;
+}
+
+
+
+#sidebar ul.sidebar-nav {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul.sidebar-nav li.sidebar-item {
+    padding: 10px 15px;
+    display: block;
+}
+
+#sidebar ul.sidebar-nav li.sidebar-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+#sidebar ul.sidebar-nav li.sidebar-item a:hover {
+    background: #555;
+    color: white;
+}
+
+#sidebar .sidebar-brand {
+    padding: 10px 15px;
+    display: block;
+    background: #333;
+    color: white;
+    text-decoration: none;
+}
+
+#sidebar .sidebar-brand:hover {
+    background: #555;
+}
+
+/* Icon styles if you're using icons */
+#sidebar .icon {
+    margin-right: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+    #wpbody-content,
+    .wrap {
+        margin-left: 0;
+        padding-left: 0;
+    }
+}
+
+.wrap {
+    padding-left: 250px; /* Adjust this value to match the sidebar width */
+    /* Other styles... */
+}

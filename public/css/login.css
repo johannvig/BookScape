@@ -1,0 +1,48 @@
+#bloc{
+    height: 10vh;
+}
+
+#login-form{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    margin-left: 23vw;
+    height: auto;
+    margin-top: 10vh;
+    background-color: #dadada;
+    border-radius: 10px;
+    padding: 25px;
+}
+#login-form input{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+}
+#login-form button{
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #43454b;
+    color: white;
+    cursor: pointer;
+    width: 20%;
+    margin-left: 40%;
+}
+#motdepasseoublier{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 5vh;
+    margin-top: 10px;
+}
+#motdepasseoublier a{
+    text-decoration: none;
+    color: #43454b;
+}
+#motdepasseoublier a:hover{
+    text-decoration: underline;
+}

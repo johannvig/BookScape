@@ -1,0 +1,148 @@
+
+#container_card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+    margin-left: 10%;
+    width: 80%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#image_produit {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+#info_produit {
+    margin-bottom: 20px;
+}
+
+.price {
+    color: #3f3f3f;
+}
+
+button, .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3f3f3f;
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+button[disabled], .button[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+button:hover, .button:hover {
+    background-color: #3f3f3f;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.pt-20 {
+    padding-top: 20px;
+}
+
+.quantity {
+    margin-bottom: 20px;
+}
+
+.quantity input[type="number"] {
+    padding: 10px;
+    width: 10%;
+    border: 1px solid #ddd;
+}
+
+form {
+    display: block;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#avis_section{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.avis{
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    transition: transform 0.5s ease;
+    width: 15%;
+}
+.avis:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+#submit_avis{
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    transition: transform 0.5s ease;
+    width: 15%;
+}
+
+#submit_avis {
+    margin-top: 20px; /* Espacement du haut */
+    padding: 20px;
+    background: #f9f9f9; /* Couleur de fond */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+#submit_avis h2 {
+    color: #333; /* Couleur du titre */
+    margin-bottom: 15px; /* Espacement sous le titre */
+}
+
+#submit_avis form {
+    display: flex;
+    flex-direction: column;
+}
+
+#submit_avis label {
+    margin-bottom: 5px; /* Espacement sous le label */
+    color: #666; /* Couleur du texte du label */
+    font-weight: bold; /* Gras pour les labels */
+}
+
+#submit_avis select, 
+#submit_avis textarea {
+    padding: 10px; /* Espacement interne */
+    margin-bottom: 15px; /* Espacement en dessous de chaque élément de formulaire */
+    border: 1px solid #ddd; /* Bordure */
+    border-radius: 4px; /* Coins arrondis */
+    width: 100%; /* Pleine largeur */
+    box-sizing: border-box; /* Pour inclure padding et bordure dans la largeur */
+}
+
+#submit_avis textarea {
+    resize: vertical; /* Permet à l'utilisateur de redimensionner verticalement */
+}
+
+#submit_avis button {
+    padding: 10px 15px;
+    background-color: #3f3f3f; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis pour le bouton */
+    cursor: pointer; /* Style du curseur */
+    transition: background-color 0.3s ease; /* Transition douce pour le survol */
+}
+
+#submit_avis button:hover {
+    background-color: #3f3f3f; /* Couleur de fond au survol */
+}
