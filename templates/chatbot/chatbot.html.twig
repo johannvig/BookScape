@@ -1,0 +1,110 @@
+{# templates/components/chatbot/chatbot.html.twig #}
+<link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
+<div id="chat">
+    <div id="chat-indicator" class="show">?</div>
+    <div id="reponse"></div>
+    <form id="chatForm">
+        <input type="text" name="message" placeholder="Écrire au bot ...">
+        <input type="submit" value="Envoyer">
+    </form>
+</div>
+<script>
+var messagesHistory = [
+    {
+        role: 'system',
+        content: "Salut tu t'appelles Jean-Robert,"}
+];
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Simule l'envoi d'un message initial à l'API dès le chargement de la page
+    sendInitialMessageToAPI();
+});
+function sendInitialMessageToAPI() {
+    var initialMessage = {
+        role: 'system',
+        content: "Bonjour, je suis Jean-Ropert, votre assistant virtuel dédié sur Vente2000musique, un espace où passion et musique se rencontrent. En tant que guide convivial et informé, ma mission est de vous accompagner dans votre exploration de notre vaste sélection de musiques et livres, garantissant ainsi une expérience d'achat en ligne aussi agréable qu'efficace. Voici ce que je peux faire pour vous : Guidage personnalisé : Je suis là pour vous aider à naviguer facilement sur Vente2000musique. Que vous recherchiez des informations spécifiques sur nos produits ou que vous ayez besoin d'\aide pour finaliser votre achat, je suis votre compagnon de confiance. Conseils sur mesure : En fonction de vos goûts et préférences, je vous fournirai des recommandations personnalisées. Des dernières sorties aux classiques indémodables, je m\'assure que vous découvriez des musiques et des livres qui résonnent avec votre style personnel. Réponses à vos questions : Avez-vous une question sur un artiste, un genre musical, ou un livre en particulier ? Je suis là pour offrir des réponses rapides et précises, enrichissant ainsi votre connaissance et votre appréciation de notre catalogue. Assistance technique : Si vous rencontrez des problèmes techniques ou des interrogations sur le processus d'achat, je suis ici pour fournir une assistance immédiate, assurant ainsi une expérience d'achat sans tracas. Je suis conçu pour rendre votre visite sur Vente2000musique aussi informative, agréable et personnalisée que possible. N'hésitez pas à me solliciter à tout moment - je suis là pour vous aider à tirer le meilleur parti de votre passion pour la musique et la lecture."
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/chatbot', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log("Message initial envoyé avec succès à l'API.");
+            // Traitez ici la réponse de l'API si nécessaire
+        } else if (xhr.readyState == 4) {
+            console.error("Erreur lors de l'envoi du message initial à l'API : ", xhr.statusText);
+        }
+    };
+
+    xhr.send(JSON.stringify({messages: [initialMessage]}));
+}
+
+var chatBubble = document.getElementById('chat');
+chatBubble.addEventListener('click', function(event) {
+    this.classList.toggle('expanded');
+    updateChatInterface();
+});
+
+document.querySelectorAll('#chat form, #chat input').forEach(function(element) {
+    element.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+});
+
+document.querySelector('#chatForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var messageText = document.querySelector('#chat input[name="message"]').value;
+
+    if (messageText.trim() !== '') {
+        var userMessage = { role: 'user', content: messageText };
+        messagesHistory.push(userMessage);
+        updateChatInterface();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/chatbot', true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) { // Requête terminée
+                if (xhr.status == 200) { // Succès
+                    var response = xhr.responseText;
+                    var assistantMessage = { role: 'assistant', content: response };
+                    messagesHistory.push(assistantMessage);
+                    updateChatInterface();
+                } else { // Échec
+                    console.error("Erreur lors de la requête : ", xhr.statusText);
+                    var errorMessage = { role: 'assistant', content: "Message non reçu" };
+                    messagesHistory.push(errorMessage);
+                    updateChatInterface();
+                }
+            }
+        };
+        xhr.send(JSON.stringify({messages: messagesHistory}));
+        document.querySelector('#chat input[name="message"]').value = '';
+    }
+});
+
+
+function updateChatInterface() {
+    var chatInterface = document.querySelector('#chat #reponse');
+    chatInterface.innerHTML = '';
+
+    messagesHistory.slice(1).forEach(function(message) {
+        var messageContainer = document.createElement('div');
+        messageContainer.className = 'message-container ' + (message.role === 'user' ? 'conteneur_user' : '');
+
+        var messageDiv = document.createElement('div');
+        messageDiv.className = 'message ' + message.role;
+        messageDiv.textContent = message.content;
+
+        messageContainer.appendChild(messageDiv);
+        chatInterface.appendChild(messageContainer);
+    });
+
+    chatInterface.scrollTop = chatInterface.scrollHeight;
+}
+</script>
+
+<script src="js/chatbot.js"></script>

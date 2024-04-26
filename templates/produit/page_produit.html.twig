@@ -1,0 +1,72 @@
+{% block body %}
+{{include('header.html.twig')}}
+<link rel="stylesheet" href="{{ asset('css/page_produit.css') }}">
+
+<div id="container_card">
+    <h1>Produit: {{ article.titre }}</h1>
+    {% if article.image %}
+        <img id="image_produit" src="{{ asset(article.image) }}" alt="{{ article.titre }}" />
+    {% endif %}
+    <div id="info_produit">
+        <p>
+            <strong class="price">Prix:</strong> {{ article.prix }}€<br>
+            <strong>Disponibilité:</strong> {{ article.disponibilite ? 'Disponible' : 'Indisponible' }}<br>
+            <strong>Quantité:</strong> {{ article.disponibilite }}<br>
+        </p>
+    </div>
+
+    {% if article.disponibilite > 0 %}
+        <div class="mb-20">
+            <form action="{{ path('ajouterLigne', {'id': article.id}) }}" method="post" class="pt-20">
+                <div class="quantity">
+                    <label for="quantity_{{ article.id }}">Quantité</label>
+                    <input id="quantity_{{ article.id }}" type="number" name="quantite" min="1" max="{{ article.disponibilite }}" value="1">
+                </div>
+                <button id="ajouter_au_panier" type="submit">Ajouter au panier</button>
+            </form>
+        </div>
+    {% else %}
+        <button disabled>Ajouter au panier</button>
+        <p>Inscrivez-vous pour être averti quand le produit sera de nouveau en stock :</p>
+        <form action="{{ path('notifierDisponibilite') }}" method="post">
+            <input type="email" name="email" placeholder="Entrez votre email" required>
+            <input type="hidden" name="article_id" value="{{ article.id }}">
+            <button type="submit">M'avertir</button>
+        </form>
+    {% endif %}
+    <h2>Avis sur le produit</h2>
+    <div id="avis_section">
+        {% if avis is not empty %}
+            {% for avis in avis %}
+                <div class="avis">
+                    <p><strong>Note:</strong> {{ avis.getNoteAvis() }} / 5</p>
+                    <p><strong>Commentaire:</strong> {{ avis.getCommentaireAvis() }}</p>
+                    <p><strong>Date:</strong> {{ avis.getDateAvis()|date('d/m/Y') }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun avis disponible pour ce produit.</p>
+        {% endif %}
+    </div>
+    {% if app.user %}
+        <div id="submit_avis">
+            <h2>Ajouter un avis</h2>
+            <form action="{{ path('ajouter_avis', {'id': article.id}) }}" method="post">
+                <label for="note">Note :</label>
+                <select id="note" name="note" required>
+                    <option value="">Choisir une note</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="commentaire">Commentaire :</label>
+                <textarea id="commentaire" name="commentaire" rows="4" required></textarea>
+                <button type="submit">Envoyer l'avis</button>
+            </form>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

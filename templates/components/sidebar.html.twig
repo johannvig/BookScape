@@ -1,0 +1,48 @@
+{# templates/components/sidebar.html.twig #}
+
+<nav id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <a class="sidebar-brand" href="{{ path('adminHome') }}">
+            <i class="icon-home"></i>
+            <span class="align-middle">Accueil Admin</span>
+        </a>
+
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('adminHome') }}">
+                    <i class="icon-grid"></i> Dashboard
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('adminMusiques') }}">
+                    <i class="icon-music"></i> Musiques
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('adminLivres') }}">
+                    <i class="icon-book-open"></i> Livres
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('adminOrders') }}">
+                    <i class="icon-basket"></i> Commandes
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('adminUsers') }}">
+                    <i class="icon-basket"></i> Utilisateurs
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('app_logout') }}">
+                    <i class="icon-logout"></i> Se Déconnecter
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+

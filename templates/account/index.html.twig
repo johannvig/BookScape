@@ -1,0 +1,35 @@
+{# templates/account/index.html.twig #}
+
+{% extends 'base/base.admin.html.twig' %}
+
+{% block sidebar %}
+    {% include 'components/user_sidebar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<div class="grix xs4 container">
+  <div class="col-xs4"><h1>Profil de {{ user.getUserIdentifier() }}</h1></div>
+  <div class="col-xs1">Email :</div>
+  <div class="col-xs3">{{ user.email }}</div>
+  <div class="col-xs1">Nom :</div>
+  <div class="col-xs3">{{ user.nomCompte}}</div>
+  <div class="col-xs1">Prénom :</div>
+  <div class="col-xs3">{{ user.prenomCompte}}</div>
+  <div class="col-xs1">Numéro de téléphone :</div>
+  <div class="col-xs3">{{ user.numTelCompte}}</div>
+  <div class="col-xs1">Adresse postale :</div>
+  <div class="col-xs3">{{ user.adressePostaleCompte}}</div>
+  <div class="col-xs1">Code postal :</div>
+  <div class="col-xs3">{{ user.codePostalCompte}}</div>
+  <div class="col-xs1">Ville :</div>
+  <div class="col-xs3">{{ user.villeCompte}}</div>
+  <div class="col-xs1">Pays :</div>
+  <div class="col-xs3">{{ user.paysCompte}}</div>
+  <div class="col-xs4">
+    <a href="{{ path('user_edit_profile') }}">Modifier le profil</a>
+    <a href="{{ path('account_change_password') }}">Modifier le mot de passe</a>
+  </div>
+</div>
+
+
+{% endblock %}

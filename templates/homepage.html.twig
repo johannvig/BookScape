@@ -1,0 +1,69 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/carrouselle.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500&display=swap">
+{% endblock %}
+
+
+{% block body %}
+    {{include('header.html.twig')}}
+    <header>
+        <div id="Accueil">
+            <div><h1>Bienvenue sur Culture2000 </h1>
+            <p>Vous retrouverez ici tous les cd ou livres dont vous rêvez</p></div>
+            <img src="images/logo.png" alt="">
+        </div>
+        <form id="bar_de_recherche" method="get" action="{{ path('afficheRechercheFiltree') }}">
+            <input type="text" name="titre" placeholder="Rechercher un titre">
+            <button type="submit">
+                <img src="images/search.svg" alt="Rechercher">
+            </button>
+        </form>
+
+    </header>
+    <img src="images/bordure.png" id="bordure" alt="">
+    <div id="promotion">
+        <h1>Nos Articles vedette </h1>
+        <div id="slider-container">
+                <button id="slide-left">&#10094;</button>
+                <div id="containeur_produit">
+                    {% for article in articles %}
+                        <a href="page_produit?id={{article.id}}" class="card">
+                            <img src="{{ asset(article.image) }}" style="object-fit: cover;">
+                            <h4>{{ article.titre }}</h4>
+                            <p>Seulement : {{ article.prix }} €</p>
+                        </a>
+                    {% endfor %}
+                </div>
+                <button id="slide-right">&#10095;</button>
+            </div>
+    </div>
+    <div id="containeur_page">
+    <h1>Comment fonctionne Culture2000</h1>
+    <img src="images/explication.png" id="imageExplication" alt="">
+    <div class="explication">
+        <div class="text">
+            <h1>Qu'est ce que Culture2000 ?</h1>
+            <h2>Culture2000 est un site de ecommerce qui vous propose une large gamme d’articles allant du dernière articles de musique au livre d’harry potter.</h2>
+            <p>Notre site vous propose une large gamme d’articles allant du dernière articles de musique au livre d’harry potter. Nous vous proposons des articles de qualité à des prix abordables. Nous vous proposons également un service de livraison rapide et efficace. </p>
+        </div>
+        <img id="illustration" src="images/fonctionnement.png" alt="image illustration">
+    </div>
+    <div class="explication">
+        <img src="images/livraison.png">
+        <div class="text">
+            <h1>Comment fonctionne la livraison avec Culture2000 ?</h1>
+            <h3>Culture2000 est fière de son système de livraison en seulement un jour : commandez votre article et recevez-le le lendemain. Cette livraison est assurée par nos livreurs triés sur le volet pour garantir une prestation optimale.</h3>
+            <p>Nous tenons à exprimer notre profonde gratitude envers notre clientèle, qui nous a permis de devenir les leaders dans le domaine de la vente culturelle. Ce titre est la consécration d'un travail acharné et la preuve de notre savoir-faire ainsi que de nos valeurs.</p>
+            <a href="afficheRecherche">Voir les articles</a>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <a href="mailto:culture2000@gmail.com">Nous contacter</a>
+        <a href="mentions">Mentions legales</a>
+    </footer>
+    <script src="js/homepage.js"></script>
+    {% include 'chatbot/chatbot.html.twig' %}
+{% endblock %}

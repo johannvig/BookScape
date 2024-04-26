@@ -1,0 +1,14 @@
+{# templates/admin/order_details.html.twig #}
+
+{% extends 'base/base.admin.html.twig' %}
+{# {% block sidebar %}
+    {% include 'components/sidebar.html.twig' %}
+{% endblock %} #}
+
+{% block title %}Admin - Détails de la Commande{% endblock %}
+
+{% block body %}
+    <h1>Détails de la Commande {{ order.id }}</h1>
+    {# Display the details of the order here #}
+    {# For example, you might list the products in the order, the total price, etc. #}
+{% endblock %}

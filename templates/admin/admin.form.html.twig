@@ -1,0 +1,20 @@
+{% extends 'base/base.admin.html.twig' %}
+{% block sidebar %}
+    {% include 'components/sidebar.html.twig' %}
+{% endblock %}
+{% block body %}
+				<header id="header" class="col-full">
+					<div id="logo">
+						<h1 class="site-title">Administration du site web marchand</h1>
+					</div>
+				</header>
+				<div class="panel-wrap product_data">
+					<div id="general_product_data" class="woocommerce_options_panel">
+						<div class="options_group">
+						{{ form(form) }}
+						</div>
+					</div>
+				</div>
+{% endblock %}
+
+

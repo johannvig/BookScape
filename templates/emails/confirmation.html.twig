@@ -1,0 +1,10 @@
+{% block body %}
+<div class="confirmation-container">
+    <div class="confirmation-card">
+        <!-- Autres éléments... -->
+
+        <!-- Lien de téléchargement du PDF -->
+        <a href="{{ path('download_commande_pdf', {'id': commande.id}) }}" class="btn-download">Télécharger votre commande en PDF</a>
+    </div>
+</div>
+{% endblock %}

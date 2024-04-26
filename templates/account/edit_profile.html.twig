@@ -1,0 +1,61 @@
+{% extends 'base/base.admin.html.twig' %}
+
+{% block sidebar %}
+    {% include 'components/user_sidebar.html.twig' %}
+{% endblock %}
+
+{% block title %}Modifier le profil{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Modifier le profil</h1>
+
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.nomCompte) }}
+            {{ form_widget(form.nomCompte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nomCompte) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.prenomCompte) }}
+            {{ form_widget(form.prenomCompte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.prenomCompte) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.numTelCompte) }}
+            {{ form_widget(form.numTelCompte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.numTelCompte) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.adressePostaleCompte) }}
+            {{ form_widget(form.adressePostaleCompte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.adressePostaleCompte) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.codePostalCompte) }}
+            {{ form_widget(form.codePostalCompte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.codePostalCompte) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.villeCompte) }}
+            {{ form_widget(form.villeCompte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.villeCompte) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

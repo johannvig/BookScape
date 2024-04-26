@@ -1,0 +1,133 @@
+{% extends 'base/base.admin.html.twig' %}
+
+{% block body %}
+    <h1 class="wp-heading-inline">Administration du site web marchand</h1>
+	<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Rechercher par titre...">
+    <table class="wp-list-table widefat" id="sortable-table">
+        <thead>
+            <tr>
+                <th">Image</th>
+				<th class="column-primary" onclick="sortTable(1)">Titre</th>
+				<th onclick="sortTable(2, 'number')">Disponibilit&eacute;</th>
+				<th onclick="sortTable(3)">ISBN</th>
+				<th onclick="sortTable(4)">Genre</th>
+				<th>Date de parution</th>
+
+				<th onclick="sortTable(5, 'number')">Prix</th>
+
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr id="id_{{ article.id }}">
+                    {% if article.image is not null and article.image is not empty %}
+                        <td data-colname="Image"><img src="{{ asset(article.image) }}" alt="Image de {{ article.titre }}" style="max-width: 80px; max-height: 80px;"></td>
+                    {% else %}
+                        <td>Inexistante</td>
+                    {% endif %}
+                    <td data-colname="Titre" class="column-primary"><strong>{{ article.titre }}</strong></td>
+                    <td>{{ article.disponibilite }}</td>
+                    <td>{{ article.ISBN }}</td>
+                    {% if article.genre is not null and article.genre is not empty %}
+                        <td data-colname="Genre">{{ article.genre }}</td>
+                    {% else %}
+                        <td>Inexistante</td>
+                    {% endif %}
+                    <td data-colname="Date de parution">{{ article.dateDeParution}}</td>
+                    <td data-colname="Prix" class="product-price">{{ article.prix }}</td>
+                    <td><button onclick="window.location.href='/admin/livres/modifier?id={{ article.id }}'">Modifier</button></td>
+                    <td><button data-iddelete="{{ article.id }}">Supprimer</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="wp-list-table">
+        <tr>
+            <td><a href="/admin/livres/ajouter">Ajouter un nouveau livre</a></td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    function sortTable(n, type = 'string') {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("sortable-table");
+    switching = true;
+    dir = "asc"; 
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+
+            if (type === 'date') {
+                var xDateParts = x.textContent.split('-');
+                var yDateParts = y.textContent.split('-');
+                
+                // Convert to date object considering the format is DD-MM-YY
+                var xDate = createDateFromParts(xDateParts);
+                var yDate = createDateFromParts(yDateParts);
+
+                // Compare dates
+                if (dir == "asc" && xDate < yDate) {
+                    shouldSwitch = true;
+                    break;
+                } else if (dir == "desc" && xDate > yDate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else {
+                // Default sorting for non-date types
+                var cmpX = (type === 'number') ? parseFloat(x.textContent) : x.textContent.toLowerCase();
+                var cmpY = (type === 'number') ? parseFloat(y.textContent) : y.textContent.toLowerCase();
+
+                if (dir == "asc" && cmpX > cmpY) {
+                    shouldSwitch = true;
+                    break;
+                } else if (dir == "desc" && cmpX < cmpY) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;      
+        } else if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+        }
+    }
+}
+
+function searchTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("sortable-table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1]; // Index 1 pour la colonne "Titre"
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+</script>
+{% endblock %}

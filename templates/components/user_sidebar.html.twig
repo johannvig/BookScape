@@ -1,0 +1,30 @@
+{# templates/components/user_sidebar.html.twig #}
+
+<nav id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <a class="sidebar-brand" href="{{ path('homepage') }}">
+            <i class="icon-home"></i>
+            <span class="align-middle">Page d'acceuil</span>
+        </a>
+
+        <ul class="sidebar-nav">
+            <!-- Exemple de lien pour l'utilisateur -->
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('user_orders') }}">
+                    <i class="icon-basket"></i> Mes Commandes
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('userIndex') }}">
+                    <i class="icon-user"></i> Mon Profil
+                </a>
+            </li>
+            <!-- Lien de déconnexion -->
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ path('app_logout') }}">
+                    <i class="icon-logout"></i> Se Déconnecter
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

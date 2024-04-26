@@ -1,0 +1,166 @@
+{# templates/commande/commande.html.twig #}
+{% extends 'base/base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/styles/checkout.css') }}">
+{% endblock %}
+{% block body %}
+<header id="header" class="col-full">
+    <div id="logo">
+        <h1 class="site-title">Site web marchand</h1>
+    </div>
+</header>
+
+<div id="content" class="site-content">
+    <div class="checkout-page">
+        <!-- Etapes de Checkout -->
+        <div class="checkout-steps">
+            <!-- Votre code pour les étapes du checkout -->
+        </div>
+        
+        <!-- Informations de facturation -->
+        <form id="billing-form" method="post" action="{{ path('commanderPanier') }}">
+		<!-- Prénom -->
+		<div class="form-group">
+			<label for="first_name">First Name</label>
+			<input type="text" id="first_name" name="first_name" required placeholder="First Name" value="{{ user.first_name | default('') }}">
+		</div>
+
+		<!-- Nom -->
+		<div class="form-group">
+			<label for="last_name">Last Name</label>
+			<input type="text" id="last_name" name="last_name" required placeholder="Last Name" value="{{ user.last_name | default('') }}">
+		</div>
+
+		<!-- Email -->
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email" required placeholder="Email" value="{{ user.email | default('') }}">
+		</div>
+
+		<!-- Téléphone -->
+		<div class="form-group">
+			<label for="telephone">Telephone</label>
+			<input type="tel" id="telephone" name="telephone" required placeholder="Telephone" value="{{ user.telephone | default('') }}">
+		</div>
+
+		<!-- Adresse de Livraison -->
+		<div class="form-group">
+			<label for="address_livraison">Address (Livraison)</label>
+			<input type="text" id="address_livraison" name="address_livraison" required placeholder="Address" value="{{ user.address | default('') }}">
+		</div>
+
+		<!-- Ville de Livraison -->
+		<div class="form-group">
+			<label for="city_livraison">City (Livraison)</label>
+			<input type="text" id="city_livraison" name="city_livraison" required placeholder="City" value="{{ user.city | default('') }}">
+		</div>
+
+		<!-- Code Postal de Livraison -->
+		<div class="form-group">
+			<label for="postal_code_livraison">ZIP / Postal Code (Livraison)</label>
+			<input type="text" id="postal_code_livraison" name="postal_code_livraison" required placeholder="ZIP / Postal Code" value="{{ user.postal_code | default('') }}">
+		</div>
+
+		<!-- Pays de Livraison -->
+		<div class="form-group">
+			<label for="country_livraison">Country (Livraison)</label>
+			<select id="country_livraison" name="country_livraison" required>
+				<option value="">Select...</option>
+				<!-- Utilisez une structure de contrôle pour gérer les utilisateurs connectés et les visiteurs -->
+				{% if user is defined and user.country is defined %}
+					<!-- Affichage des options de pays pour un utilisateur connecté -->
+					<option value="france" {% if user.country == 'france' %}selected{% endif %}>France</option>
+					<!-- Ajouter d'autres options de pays ici, basées sur user.paysCompte -->
+				{% else %}
+					<!-- Affichage des options de pays pour un visiteur -->
+					<option value="france">France</option>
+					<!-- Ajouter d'autres options de pays ici pour les visiteurs -->
+				{% endif %}
+			</select>
+		</div>
+
+		<!-- Bouton pour copier l'adresse -->
+		<div class="form-group">
+			<button type="button" id="copyAddressButton">Copier l'adresse de livraison</button>
+		</div>
+
+
+		<!-- Adresse de Facturation -->
+		<div class="form-group">
+			<label for="address_facturation">Address (Facturation)</label>
+			<input type="text" id="address_facturation" name="address_facturation" required placeholder="Address" value="{{ user.address | default('') }}">
+		</div>
+
+		<!-- Ville de Facturation -->
+		<div class="form-group">
+			<label for="city_facturation">City (Facturation)</label>
+			<input type="text" id="city_facturation" name="city_facturation" required placeholder="City" value="{{ user.city | default('') }}">
+		</div>
+
+		<!-- Code Postal de Facturation -->
+		<div class="form-group">
+			<label for="postal_code_facturation">ZIP / Postal Code (Facturation)</label>
+			<input type="text" id="postal_code_facturation" name="postal_code_facturation" required placeholder="ZIP / Postal Code" value="{{ user.postal_code | default('') }}">
+		</div>
+
+		<!-- Pays de Facturation -->
+		<div class="form-group">
+			<label for="country_facturation">Country (Facturation)</label>
+			<select id="country_facturation" name="country_facturation" required>
+				<option value="">Select...</option>
+				<!-- Utilisez une structure de contrôle pour gérer les utilisateurs connectés et les visiteurs -->
+				{% if user is defined and user.country is defined %}
+					<!-- Affichage des options de pays pour un utilisateur connecté -->
+					<option value="france" {% if user.country == 'france' %}selected{% endif %}>France</option>
+					<!-- Ajouter d'autres options de pays ici, basées sur user.country -->
+				{% else %}
+					<!-- Affichage des options de pays pour un visiteur -->
+					<option value="france">France</option>
+					<!-- Ajouter d'autres options de pays ici pour les visiteurs -->
+				{% endif %}
+			</select>
+		</div>
+
+
+
+
+				<!-- Bouton de soumission -->
+				<button type="submit">Continue</button>
+			</form>
+
+        </div>
+        
+        <!-- Résumé de la commande -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-items">
+                <!-- Boucle sur les articles du panier pour afficher les résumés -->
+                {% for lignePanier in panier.lignesPanier %}
+				<div class="order-item">
+					<span class="item-title">{{ lignePanier.article.titre }}</span>
+					<span class="item-quantity">Qty: {{ lignePanier.quantite }}</span>
+					<span class="item-price">{{ lignePanier.prixTotal }}€</span>
+				</div>
+                {% endfor %}
+            </div>
+            <!-- Total de la commande -->
+            <div class="order-total">
+                <span>Subtotal: {{ panier.total }}€</span>
+                <!-- Ajouter plus de détails si nécessaire -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.getElementById('copyAddressButton').addEventListener('click', function() {
+            // Copie des valeurs des champs d'adresse de livraison aux champs d'adresse de facturation
+            document.getElementById('address_facturation').value = document.getElementById('address_livraison').value;
+            document.getElementById('city_facturation').value = document.getElementById('city_livraison').value;
+            document.getElementById('postal_code_facturation').value = document.getElementById('postal_code_livraison').value;
+            document.getElementById('country_facturation').value = document.getElementById('country_livraison').value;
+        });
+    </script>
+{% endblock %}

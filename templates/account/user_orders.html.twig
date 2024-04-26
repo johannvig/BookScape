@@ -1,0 +1,101 @@
+{# templates/account/user_orders.html.twig #}
+
+{% extends 'base/base.admin.html.twig' %}
+
+{% block sidebar %}
+    {% include 'components/user_sidebar.html.twig' %}
+{% endblock %}
+
+{% block title %}Mes Commandes{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Mes commandes</h2>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Rechercher par ID, Statut">
+    <table class="wp-list-table widefat" id="sortable-table">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0, 'number')">ID</th>
+                <th onclick="sortTable(1, 'date')">Date</th>
+                <th onclick="sortTable(2)">Statut</th>
+                <th>Voir commande</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.dateCommande|date('Y-m-d H:i') }}</td>
+                    <td>{{ order.statutCommande }}</td>
+                    <td>
+                        <a href="{{ path('download_commande_pdf', {'id': order.id}) }}" target="_blank">Télécharger PDF</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="3">Aucune commande trouvée.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    function sortTable(n, type = 'string') {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("sortable-table");
+        switching = true;
+        dir = "asc"; 
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                if (dir == "asc" && x.textContent.toLowerCase() > y.textContent.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                } else if (dir == "desc" && x.textContent.toLowerCase() < y.textContent.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;      
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("sortable-table");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            if (td) {
+                txtValue = td[0].textContent + " " + td[2].textContent;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

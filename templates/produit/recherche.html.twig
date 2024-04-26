@@ -1,0 +1,34 @@
+{% block body %}
+{{ include('header.html.twig') }}
+<link rel="stylesheet" href="css/recherche.css" media="screen" />
+<div id="block"></div>
+<div id="containeur_filtre_titre">
+    <h1>Listes des articles</h1>
+    <button id="toggleFilter">Filtrer</button>
+</div>
+<div id="filtres" style="display: none;">
+    <form id="form_filtre" action="/afficheRechercheFiltree" method="get">
+        <input type="text" name="titre" placeholder="Rechercher un titre ..." />
+        <select id="selection_type" name="type">
+            <option value="">Sélectionnez un type</option>
+            <option value="livre">Livre</option>
+            <option value="musique">Musique</option>
+        </select>
+        <input type="number" name="prix_min" placeholder="Prix minimum" />
+        <input type="number" name="prix_max" placeholder="Prix maximum" />
+        <input type="submit" value="Filtrer" />
+    </form>
+</div>
+<div id="containeur_produit">
+    {% for article in articles %}
+    <a class="produit" href="/page_produit?id={{ article.id }}">
+        <img src="{{ article.image }}" alt="{{ article.titre }}" />
+        <h3>{{ article.titre }}</h3>
+        <p>{{ article.prix }} €</p>
+    </a>
+    {% endfor %}
+</div>
+{{ include('chatbot/chatbot.html.twig') }}
+
+<script src="js/recherche.js"></script>
+{% endblock %}

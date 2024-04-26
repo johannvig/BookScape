@@ -1,0 +1,58 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+    {{include('header.html.twig')}}
+    <div id="bloc"></div>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <form method="post" id="login-form">
+        <h1>Connectez-vous :</h1>
+        <h2 for="inputEmail">Email :</h2>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required autofocus>
+        <h2 for="inputPassword">Password :</h2>
+        <input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+        <div id="motdepasseoublier">
+            <a href="{{ path('forgotten_password') }}">Mot de passe oublié</a>
+            <a href="{{ path('app_register') }}">M'inscrire</a>
+        </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var loginForm = document.getElementById('login-form');
+
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(loginForm);
+        fetch('{{ path('app_login') }}', { // Assurez-vous que cette URL est correcte
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Connexion réussie, mettre à jour l'interface utilisateur
+                document.querySelector('.button-connexion').textContent = 'Mon Compte';
+                document.querySelector('.button-connexion').setAttribute('href', '/account/index');
+            } else {
+                // Gérer l'échec de la connexion
+                alert('Connexion échouée');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+});
+</script>
+
+
+
+{% endblock %}

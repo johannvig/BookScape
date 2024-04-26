@@ -1,0 +1,15 @@
+
+{% block body %}
+<div class="confirmation-container">
+    <div class="confirmation-card">
+        <div class="confirmation-icon">
+        </div>
+        <h1>Votre Commande est validé</h1>
+        <p>Vous allez recevoir par email une confirmation</p>
+
+        <a href="{{ path('download_commande_pdf', {'id': commande.id}) }}" class="btn-download">Télécharger le PDF</a>
+
+        <a href="{{ path('homepage') }}" class="btn-home">Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}

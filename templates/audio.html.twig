@@ -1,0 +1,52 @@
+{% extends 'base/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/audio.css">
+{% endblock %}
+
+{% block body %}
+{% if article.pistes is defined %}
+        {% if article.pistes|length > 0 %}
+    <div id="jquery_jplayer_{{ article.id }}" class="jp-jplayer" data-idArticle="{{ article.id }}"  data-pistes="{{ article.pistes|json_encode() }}"></div>
+    <div id="jp_container_{{ article.id }}" class="jp-audio" role="application">
+        <div class="jp-type-playlist">
+            <div class="jp-gui jp-interface">
+                <div class="jp-controls-holder">
+                    <div class="jp-controls">
+                        <button class="jp-previous" role="button" tabindex="0">previous</button>
+                        <button class="jp-play" role="button" tabindex="0">play</button>
+                        <button class="jp-next" role="button" tabindex="0">next</button>
+                    </div>
+                </div>
+            </div>
+            <div class="jp-playlist">
+                <ul>
+                </ul>
+            </div>
+            <div class="jp-no-solution">
+                <span>Update Required</span> To play the media you will need to
+                either update your browser to a recent version or update your <a
+                    href="http://get.adobe.com/flashplayer/" target="_blank">Flash
+                    plugin</a>.
+            </div>
+        </div>
+    </div> 
+        <button id="lastButton" data-idArticle="{{ article.id }}"  data-pistes="{{ article.pistes|json_encode() }}" ><<</button>
+        <button id="playButton" data-idArticle="{{ article.id }}"  data-pistes="{{ article.pistes|json_encode() }}" >Play</button>
+        <button id="pauseButton" data-idArticle="{{ article.id }}"  data-pistes="{{ article.pistes|json_encode() }}">Pauser</button>
+        <button id="nextButton" data-idArticle="{{ article.id }}"  data-pistes="{{ article.pistes|json_encode() }}" >>></button>
+        <script>
+        const bouton_play = document.getElementById("playButton");
+        console.log("Le bouton est : "=bouton_play);
+        </script>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="/js/jplayer-2.9.2/jplayer/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="/js/jplayer-2.9.2/add-on/jplayer.playlist.min.js"></script>
+    <script type="text/javascript" src="/js/jplayer-2.9.2/add-on/jquery.jplayer.inspector.js"></script>
+    <script src="/js/audio.js"></script>
+{% endblock %}

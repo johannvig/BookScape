@@ -1,0 +1,27 @@
+{% block body %}
+{{include('header.html.twig')}}
+<link rel="stylesheet" href="{{ asset('css/panier_vide.css') }}">
+<link rel="stylesheet" href="{{ asset('css/carrouselle.css') }}">
+	<div id="bloc"></div>
+	<div id="page">
+		<h1>Votre panier est vide</h1>
+		<p>Vous n'avez pas encore ajouté d'articles à votre panier.</p>
+	</div>
+	<div id="promotion">
+        <h1>Nos Articles vedette :</h1>
+        <div id="slider-container">
+                <button id="slide-left">&#10094;</button>
+                <div id="containeur_produit">
+                    {% for article in articles %}
+                        <a href="page_produit?id={{article.id}}" class="card">
+                            <img src="{{ asset(article.image) }}" style="object-fit: cover;">
+                            <h4>{{ article.titre }}</h4>
+                            <p>Seulement : {{ article.prix }} €</p>
+                        </a>
+                    {% endfor %}
+                </div>
+                <button id="slide-right">&#10095;</button>
+            </div>
+    </div>
+    <script src="js/homepage.js"></script>
+{% endblock %}

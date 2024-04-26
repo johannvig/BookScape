@@ -1,0 +1,143 @@
+{% extends 'base/base.admin.html.twig' %}
+
+{% block body %}
+    <h1 class="wp-heading-inline">Administration du site web marchand</h1>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Rechercher par email,nom...">
+    <table class="wp-list-table widefat" id="sortable-table">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0, 'number')">ID</th>
+                <th onclick="sortTable(1)">Nom</th>
+                <th onclick="sortTable(2)">Prénom</th>
+                <th onclick="sortTable(3)">Email</th>
+                <th onclick="sortTable(4)">Email Validé</th>
+                <th onclick="sortTable(5)">Téléphone</th>
+                <th onclick="sortTable(6)">Adresse</th>
+                <th onclick="sortTable(7)">Ville</th>
+                <th onclick="sortTable(8)">Pays</th>
+                <th>Rôle</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.nomCompte }}</td>
+                    <td>{{ user.prenomCompte }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+                    <td>{{ user.numTelCompte }}</td>
+                    <td>{{ user.adressePostaleCompte }}</td>
+                    <td>{{ user.villeCompte }}</td>
+                    <td>{{ user.paysCompte }}</td>
+                    <td>{{ user.roles|join(', ') }}</td>
+                    <td><button onclick="window.location.href='/admin/users/modifier?id={{ user.id }}'">Modifier</button></td>
+                    <td><form action="{{ path('adminUtilisateursSupprimer', {'id': user.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                        <input type="submit" value="Supprimer">
+                    </form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="wp-list-table">
+        <tr>
+            <td><a href="/admin/users/ajouter">Ajouter un nouvel utilisateur</a></td>
+        </tr>
+    </table>
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+<script>
+    function sortTable(n, type = 'string') {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("sortable-table");
+    switching = true;
+    dir = "asc"; 
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+
+            if (type === 'date') {
+                var xDateParts = x.textContent.split('-');
+                var yDateParts = y.textContent.split('-');
+                
+                // Convert to date object considering the format is DD-MM-YY
+                var xDate = createDateFromParts(xDateParts);
+                var yDate = createDateFromParts(yDateParts);
+
+                // Compare dates
+                if (dir == "asc" && xDate < yDate) {
+                    shouldSwitch = true;
+                    break;
+                } else if (dir == "desc" && xDate > yDate) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else {
+                // Default sorting for non-date types
+                var cmpX = (type === 'number') ? parseFloat(x.textContent) : x.textContent.toLowerCase();
+                var cmpY = (type === 'number') ? parseFloat(y.textContent) : y.textContent.toLowerCase();
+
+                if (dir == "asc" && cmpX > cmpY) {
+                    shouldSwitch = true;
+                    break;
+                } else if (dir == "desc" && cmpX < cmpY) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;      
+        } else if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+        }
+    }
+}
+
+function searchTable() {
+    var input, filter, table, tr, tdNom, tdPrenom, tdEmail, i, txtValueNom, txtValuePrenom, txtValueEmail;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("sortable-table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+        tdNom = tr[i].getElementsByTagName("td")[1]; // Index 1 pour la colonne "Nom"
+        tdPrenom = tr[i].getElementsByTagName("td")[2]; // Index 2 pour la colonne "Prénom"
+        tdEmail = tr[i].getElementsByTagName("td")[3]; // Index 3 pour la colonne "Email"
+
+        if (tdNom || tdPrenom || tdEmail) {
+            txtValueNom = tdNom.textContent || tdNom.innerText;
+            txtValuePrenom = tdPrenom.textContent || tdPrenom.innerText;
+            txtValueEmail = tdEmail.textContent || tdEmail.innerText;
+
+            if (txtValueNom.toUpperCase().indexOf(filter) > -1 || 
+                txtValuePrenom.toUpperCase().indexOf(filter) > -1 ||
+                txtValueEmail.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
+</script>
+{% endblock %}

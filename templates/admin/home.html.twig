@@ -1,0 +1,14 @@
+{# templates/admin/home.html.twig #}
+
+{% extends 'base/base.admin.html.twig' %}
+
+{# Remove the block sidebar if it is already defined in base/base.admin.html.twig #}
+{# This block only needs to be defined once in the base template #}
+{# {% block sidebar %}
+    {% include 'components/sidebar.html.twig' %}
+{% endblock %} #}
+
+{% block body %}
+    <h1>Bienvenue dans l'Espace Administrateur</h1>
+    <!-- Contenu de la page d'accueil de l'administrateur -->
+{% endblock %}
