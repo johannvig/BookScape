@@ -26,7 +26,7 @@ Clonez le dépôt GitHub :
 ```bash
 git clone https://github.com/johannvig/e-commerce-advanced.git
 ```
-
+![image](https://github.com/johannvig/Site-e-commerce/assets/102874093/c655011b-8789-4b07-adce-b29ba2fc3bf9)
 ![image](https://github.com/johannvig/Site-e-commerce/assets/102874093/c35e10bb-3382-4c4e-8471-d30ebbd66be7)
 ![image](https://github.com/johannvig/Site-e-commerce/assets/102874093/b5f462ac-f2e9-48ae-b451-32e1cd46e503)
 ![image](https://github.com/johannvig/Site-e-commerce/assets/102874093/8a5f9f0e-8f29-4f01-8d55-ea6d3927abeb)
