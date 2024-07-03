@@ -24,4 +24,4 @@ Ce projet est une évolution d'un site de e-commerce existant, visant à amélio
 ### Configuration et démarrage
 Clonez le dépôt GitHub :
 ```bash
-git clone https://github.com/votre_username/e-commerce-advanced.git
+git clone https://github.com/johannvig/e-commerce-advanced.git
