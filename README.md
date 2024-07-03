@@ -25,7 +25,7 @@ Ce projet est une évolution d'un site de e-commerce existant, visant à amélio
 Clonez le dépôt GitHub :
 ```bash
 git clone https://github.com/johannvig/e-commerce-advanced.git
-
+```
 
 ![image](https://github.com/johannvig/Site-e-commerce/assets/102874093/c35e10bb-3382-4c4e-8471-d30ebbd66be7)
 ![image](https://github.com/johannvig/Site-e-commerce/assets/102874093/b5f462ac-f2e9-48ae-b451-32e1cd46e503)
